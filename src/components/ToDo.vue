@@ -2,14 +2,16 @@
 import { computed, ref, watch } from 'vue'
 import { Icon } from '@iconify/vue'
 
+interface ToDo {
+  id: number
+  text: string
+  done: boolean
+}
+
 let id = 0
 const newTodo = ref()
 const show = ref('all')
-const todos = ref([
-  { id: id++, text: 'Learn HTML', done: true },
-  { id: id++, text: 'Learn JavaScript', done: true },
-  { id: id++, text: 'Learn Vue', done: false },
-])
+const todos = ref<ToDo[]>([])
 
 const filteredTodos = computed(() => {
   if (show.value === 'pending') {
@@ -87,8 +89,9 @@ function removeTodo(todo: any) {
   font-size: 18px;
   background-color: var(--vt-c-black-mute);
   border: 1px solid gray;
-  flex-grow: 1;
+  flex: 1;
   border-radius: 999px 0 0 999px;
+  width: 100%;
 }
 .todo-form input:focus {
   outline: 1px solid lightgray;
